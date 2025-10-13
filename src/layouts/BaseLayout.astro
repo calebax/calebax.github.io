@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from 'astro'
+
 import { Footer, Header, ThemeProvider } from 'astro-pure/components/basic'
 import type { SiteMeta } from 'astro-pure/types'
 import BaseHead from '@/components/BaseHead.astro'
@@ -11,11 +13,13 @@ import '@/assets/styles/app.css'
 interface Props {
   meta: SiteMeta
   highlightColor?: string
+  backgroundImage?: ImageMetadata
 }
 
 const {
   meta: { articleDate, description = config.description, ogImage, title },
   highlightColor,
+  backgroundImage,
   ...props
 } = Astro.props
 ---
@@ -28,15 +32,25 @@ const {
 
   <body class='flex justify-center bg-background text-foreground' {...props}>
     {
-      highlightColor && (
+      backgroundImage ? (
         <div
           id='highlight-gradient'
-          class='pointer-events-none absolute start-0 top-0 z-0 h-screen w-full opacity-25'
-          style={`background-image:linear-gradient(${highlightColor},transparent)`}
+          class='pointer-events-none absolute inset-0 z-0 opacity-40'
+          style={`background-image:url(${backgroundImage.src});background-size:cover;background-position:center;filter:blur(20px);`}
         />
+      ) : (
+        highlightColor && (
+          <div
+            id='highlight-gradient'
+            class='pointer-events-none absolute start-0 top-0 z-0 h-screen w-full opacity-25'
+            style={`background-image:linear-gradient(${highlightColor},transparent)`}
+          />
+        )
       )
     }
-    <div class='w-full max-w-[70rem] px-4 sm:px-7 lg:px-10 min-h-[100dvh] flex flex-col justify-between'>
+    <div
+      class='w-full max-w-[70rem] px-4 sm:px-7 lg:px-10 min-h-[100dvh] flex flex-col justify-between'
+    >
       <Header />
       <div class='flex-1 w-full'>
         <slot />

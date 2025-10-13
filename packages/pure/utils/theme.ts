@@ -10,7 +10,7 @@ export function listenThemeChange(theme?: string) {
 }
 
 export function setTheme(theme?: string, save = false) {
-  const themes = ['system', 'dark', 'light']
+  const themes = ['dark', 'light']
   if (theme) {
     if (!themes.includes(theme)) return
     if (save) localStorage.setItem('theme', theme)
@@ -18,7 +18,7 @@ export function setTheme(theme?: string, save = false) {
     theme = getTheme() ?? undefined
     if (save) {
       // Set theme equals undefined, switch cycle in ['system', 'dark', 'light']
-      const currentIndex = themes.indexOf(theme ?? 'system')
+      const currentIndex = themes.indexOf(theme ?? 'light')
       theme = themes[(currentIndex + 1) % themes.length]
       localStorage.setItem('theme', theme) // save theme
     }

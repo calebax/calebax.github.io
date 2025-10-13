@@ -48,7 +48,6 @@ import { Icon } from '../user'
         class='group/dark box-content size-5 rounded-md border p-1.5 transition-colors hover:bg-border sm:group-[.not-top]:rounded-xl'
       >
         <span class='sr-only'>Dark Theme</span>
-        <Icon class='system size-5 group-hover/dark:text-primary' name='computer' />
         <Icon class='light hidden size-5 group-hover/dark:text-primary' name='sun' />
         <Icon class='dark hidden size-5 group-hover/dark:text-primary' name='moon' />
       </button>
@@ -67,11 +66,11 @@ import { Icon } from '../user'
 <script is:inline>
   const toggleDarkModeElement = document.getElementById('toggleDarkMode')
   if (toggleDarkModeElement) {
-    toggleDarkModeElement.dataset.theme = localStorage.getItem('theme') || 'system'
+    toggleDarkModeElement.dataset.theme = localStorage.getItem('theme') || 'light'
   }
 </script>
 <script>
-  import { setTheme, showToast } from '../../utils'
+  import { setTheme } from '../../utils'
 
   class Header extends HTMLElement {
     constructor() {
@@ -98,7 +97,7 @@ import { Icon } from '../user'
         // document.dispatchEvent(toggleDarkModeEvent)
         const newTheme = setTheme(undefined, true)
         darkModeBtn.dataset.theme = newTheme
-        showToast({ message: `Set theme to ${newTheme}` })
+        // showToast({ message: `Set theme to ${newTheme}` })
       })
 
       // Menu
