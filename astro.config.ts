@@ -1,3 +1,4 @@
+import cloudflare from '@astrojs/cloudflare'
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
 // import vercel from '@astrojs/vercel'
 import AstroPureIntegration from 'astro-pure'
@@ -30,7 +31,7 @@ export default defineConfig({
   // Deploy to a sub path; See https://astro-pure.js.org/docs/setup/deployment#platform-with-base-path
   trailingSlash: 'never',
 
-  output: 'static',
+  // output: 'static',
 
   // Adapter
   // https://docs.astro.build/en/guides/deploy/
@@ -42,6 +43,9 @@ export default defineConfig({
   // 3. Local (standalone)
   // adapter: node({ mode: 'standalone' }),
   // output: 'server',
+  // 4. Cloudflare Pages (static)
+  adapter: cloudflare(),
+  output: 'server',
   // ---
 
   image: {
