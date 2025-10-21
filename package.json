@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "dev:check": "astro check --watch & astro dev",
-    "build": "astro-pure check && astro check && astro build",
+    "build": "bun --env-file=.env astro-pure check && astro check && astro build",
     "preview": "astro preview",
     "sync": "astro sync",
     "check": "astro check",
