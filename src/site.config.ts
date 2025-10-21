@@ -7,7 +7,7 @@ export const theme: ThemeUserConfig = {
   /** Will be used in index page & copyright declaration */
   author: 'Caleb',
   /** Description metadata for your website. Can be used in page metadata. */
-  description: 'Stay hungry, stay foolish',
+  description: '今天再大的事，到了明天都是故事。',
   /** The default favicon for your site which should be a path to an image in the `public/` directory. */
   favicon: '/favicon/favicon.ico',
   /** Specify the default language for this site. */
@@ -49,7 +49,7 @@ export const theme: ThemeUserConfig = {
     menu: [
       { title: '主页', link: '/' },
       { title: '文章', link: '/blog' },
-      { title: '声音', link: '/blog' },
+      { title: '声音', link: '/sound' },
       { title: '关于', link: '/about' }
     ]
   },
@@ -90,23 +90,17 @@ export const theme: ThemeUserConfig = {
 }
 
 export const integ: IntegrationUserConfig = {
-  // Links management
+  // 友情链接
   // See: https://astro-pure.js.org/docs/integrations/links
   links: {
     // Friend logbook
-    logbook: [
-      { date: '2025-03-16', content: 'Is there a leakage?' },
-      { date: '2025-03-16', content: 'A leakage of what?' },
-      { date: '2025-03-16', content: 'I have a full seat of water, like, full of water!' },
-      { date: '2025-03-16', content: 'Must be the water.' },
-      { date: '2025-03-16', content: "Let's add that to the words of wisdom." }
-    ],
+    logbook: [{ date: '2025-03-16', content: 'Is there a leakage?' }],
     // Yourself link info
     applyTip: [
       { name: 'Name', val: theme.title },
       { name: 'Desc', val: theme.description || 'Null' },
-      { name: 'Link', val: 'https://astro-pure.js.org/' },
-      { name: 'Avatar', val: 'https://astro-pure.js.org/favicon/favicon.ico' }
+      { name: 'Link', val: 'https://ckangle.com' },
+      { name: 'Avatar', val: 'https://ckanngle.com/favicon/favicon.ico' }
     ]
   },
   // Enable page search function

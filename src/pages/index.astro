@@ -12,7 +12,7 @@ const allPosts = await getBlogCollection()
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 ---
 
-<PageLayout meta={{ title: '首页' }} highlightColor='#000000'>
+<PageLayout meta={{ title: '首页' }} backgroundImage={bgimg} highlightColor='#000000'>
   <main class='flex w-full flex-col items-center'>
     <section class='animate mb-10 flex flex-col items-center gap-y-7' id='content-header'>
       <div class='flex flex-col items-center gap-y-4'>

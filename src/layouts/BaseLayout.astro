@@ -10,6 +10,8 @@ import config from '@/site-config'
 // all pages through the use of the <BaseLayout /> component.
 import '@/assets/styles/app.css'
 
+import defaultBg from '@/assets/cat.png'
+
 interface Props {
   meta: SiteMeta
   highlightColor?: string
@@ -22,6 +24,8 @@ const {
   backgroundImage,
   ...props
 } = Astro.props
+
+const effectiveBackgroundImage = backgroundImage ?? (defaultBg as ImageMetadata)
 ---
 
 <html lang={config.locale.lang}>
@@ -32,11 +36,11 @@ const {
 
   <body class='flex justify-center bg-background text-foreground' {...props}>
     {
-      backgroundImage ? (
+      effectiveBackgroundImage ? (
         <div
           id='highlight-gradient'
-          class='pointer-events-none absolute inset-0 z-0 opacity-40'
-          style={`background-image:url(${backgroundImage.src});background-size:cover;background-position:center;filter:blur(20px);`}
+          class='pointer-events-none fixed inset-0 z-0 opacity-40'
+          style={`background-image:url(${effectiveBackgroundImage.src});background-size:cover;background-position:center;`}
         />
       ) : (
         highlightColor && (
@@ -49,7 +53,13 @@ const {
       )
     }
     <div
-      class='w-full max-w-[70rem] px-4 sm:px-7 lg:px-10 min-h-[100dvh] flex flex-col justify-between'
+      id='glass-overlay'
+      class='pointer-events-none fixed inset-0 z-10'
+      style='backdrop-filter: blur(88px) saturate(1.2); background-color: hsl(var(--background) / 0.16); background-image: linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(255,255,255,0.08));'
+    >
+    </div>
+    <div
+      class='relative z-20 w-full max-w-[70rem] px-4 sm:px-7 lg:px-10 min-h-[100dvh] flex flex-col justify-between'
     >
       <Header />
       <div class='flex-1 w-full'>
