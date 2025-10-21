@@ -25,9 +25,9 @@ import config from './src/site.config.ts'
 // https://astro.build/config
 export default defineConfig({
   // Top-Level Options
-  site: 'http://calebax.github.io',
+  site: 'https://calebax.github.io',
+  base: '/',
   // Deploy to a sub path; See https://astro-pure.js.org/docs/setup/deployment#platform-with-base-path
-  // base: '/astro-pure/',
   trailingSlash: 'never',
 
   // Adapter
