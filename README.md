@@ -1,6 +1,8 @@
-# Caleb Blog
+# [Caleb Blog](https://see.ckangle.com)
 
 基于 **Astro** 的个人博客站点。
+
+> 看看：[see.ckangle.com](https://see.ckangle.com)
 
 ## 快速开始
 

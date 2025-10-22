@@ -3,12 +3,14 @@ import { Image } from 'astro:assets'
 
 import PageLayout from '@/layouts/CommonPage.astro'
 import Substats from '@/components/about/Substats.astro'
+import ProjectSection from '@/components/projects/ProjectSection.astro'
 import Sponsorship from '@/components/projects/Sponsorship.astro'
 import alipay from '@/assets/alipay-qrcode.jpg'
 import wechat from '@/assets/wechat-qrcode.jpg'
 
 const headings = [
   { depth: 2, slug: 'social-networks', text: '活动范围' },
+  { depth: 2, slug: 'projects', text: '项目' },
   { depth: 2, slug: 'sponsorship', text: '喝杯咖啡' }
 ]
 ---
@@ -50,6 +52,22 @@ const headings = [
     ]}
   />
 
+  <h2 id='projects'>项目</h2>
+  <ProjectSection
+    projects={[
+      {
+        name: '🌐 Rin',
+        description: 'A new browser built with Tauri',
+        links: [
+          { type: 'github', href: 'https://github.com/calebax/Rin' },
+          {
+            type: 'release',
+            href: 'https://github.com/calebax/Rin/releases'
+          }
+        ]
+      }
+    ]}
+  />
   <!-- sponsorship -->
   <h2 id='sponsorship'>☕️</h2>
   <p>赞助后，请留言或主动联系我。</p>
