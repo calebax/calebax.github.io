@@ -23,6 +23,9 @@ import {
 } from './src/plugins/shiki-transformers.ts'
 import config from './src/site.config.ts'
 
+const platform = process.env.DEPLOYMENT_PLATFORM
+const isCloudflare = platform === 'cloudflare'
+
 // https://astro.build/config
 export default defineConfig({
   // Top-Level Options
@@ -30,9 +33,6 @@ export default defineConfig({
   base: '/',
   // Deploy to a sub path; See https://astro-pure.js.org/docs/setup/deployment#platform-with-base-path
   trailingSlash: 'never',
-
-  // output: 'static',
-
   // Adapter
   // https://docs.astro.build/en/guides/deploy/
   // 1. Vercel (serverless)
@@ -44,8 +44,8 @@ export default defineConfig({
   // adapter: node({ mode: 'standalone' }),
   // output: 'server',
   // 4. Cloudflare Pages (static)
-  adapter: cloudflare(),
-  output: 'server',
+  adapter: isCloudflare ? cloudflare() : undefined,
+  output: isCloudflare ? 'server' : 'static',
   // ---
 
   image: {
