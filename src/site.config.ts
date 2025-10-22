@@ -15,11 +15,12 @@ export const theme: ThemeUserConfig = {
     lang: 'zh-CN',
     attrs: 'zh-CN',
     // Date locale
-    dateLocale: 'zh-CN',
+    dateLocale: 'en-US',
     dateOptions: {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      timeZone: 'UTC'
     }
   },
   /** Set a logo image to show in the homepage. */
