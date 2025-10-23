@@ -1,5 +1,6 @@
 import cloudflare from '@astrojs/cloudflare'
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
+import partytown from '@astrojs/partytown'
 // import vercel from '@astrojs/vercel'
 import AstroPureIntegration from 'astro-pure'
 import { defineConfig } from 'astro/config'
@@ -29,7 +30,7 @@ const isCloudflare = platform === 'cloudflare'
 // https://astro.build/config
 export default defineConfig({
   // Top-Level Options
-  site: 'https://calebax.github.io',
+  site: 'https://see.ckangle.com',
   base: '/',
   // Deploy to a sub path; See https://astro-pure.js.org/docs/setup/deployment#platform-with-base-path
   trailingSlash: 'never',
@@ -59,11 +60,17 @@ export default defineConfig({
     // astro-pure will automatically add sitemap, mdx & unocss
     // sitemap(),
     // mdx(),
-    AstroPureIntegration(config)
+    AstroPureIntegration(config),
     // (await import('@playform/compress')).default({
     //   SVG: false,
     //   Exclude: ['index.*.js']
     // }),
+    partytown({
+      config: {
+        debug: false,
+        forward: ['dataLayer.push', 'gtag']
+      }
+    })
 
     // Temporary fix vercel adapter
     // static build method is not needed
@@ -111,6 +118,9 @@ export default defineConfig({
     contentIntellisense: true
   },
   vite: {
+    define: {
+      __GTM_ID__: JSON.stringify(process.env.PUBLIC_GTM_ID || '')
+    },
     plugins: [
       //   visualizer({
       //     emitFile: true,
