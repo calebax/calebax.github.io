@@ -123,18 +123,25 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
   const image = document.getElementById('blurImage') as HTMLImageElement
 
   if (image) {
-    window.addEventListener('scroll', () => {
-      const scrollDistance = window.scrollY
-      // console.log(scrollDistance, threshold1, threshold2, threshold3)
-
-      if (scrollDistance >= threshold3) {
-        image.style.opacity = '0.15'
-      } else if (scrollDistance >= threshold2) {
-        image.style.opacity = '0.3'
-      } else if (scrollDistance >= threshold1) {
-        image.style.opacity = '0.45'
-      }
-    })
+    let scheduled = false
+    const onScroll = () => {
+      if (scheduled) return
+      scheduled = true
+      requestAnimationFrame(() => {
+        const scrollDistance = window.scrollY
+        if (scrollDistance >= threshold3) {
+          image.style.opacity = '0.15'
+        } else if (scrollDistance >= threshold2) {
+          image.style.opacity = '0.3'
+        } else if (scrollDistance >= threshold1) {
+          image.style.opacity = '0.45'
+        } else {
+          image.style.opacity = '0.6'
+        }
+        scheduled = false
+      })
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
   }
 </script>
 
@@ -142,5 +149,8 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
   #blurImage {
     --un-blur: blur(24px);
     filter: var(--un-blur);
+    will-change: opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 </style>

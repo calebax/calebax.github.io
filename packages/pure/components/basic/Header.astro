@@ -81,11 +81,19 @@ import { Icon } from '../user'
       // Header
       let preScrollY = window.scrollY
       this.classList.toggle('not-top', preScrollY > 20)
-      window.addEventListener('scroll', () => {
-        this.classList.toggle('not-top', window.scrollY > 20)
-        this.dataset.show = (window.scrollY < 350 || window.scrollY < preScrollY).toString()
-        preScrollY = window.scrollY
-      })
+      let scheduled = false
+      const onScroll = () => {
+        if (scheduled) return
+        scheduled = true
+        requestAnimationFrame(() => {
+          const y = window.scrollY
+          this.classList.toggle('not-top', y > 20)
+          this.dataset.show = (y < 350 || y < preScrollY).toString()
+          preScrollY = y
+          scheduled = false
+        })
+      }
+      window.addEventListener('scroll', onScroll, { passive: true })
 
       // Dark Mode
       const darkModeBtn = this.querySelector('#toggleDarkMode') as HTMLElement
@@ -118,6 +126,10 @@ import { Icon } from '../user'
       margin-inline 0.3s,
       border 0.15s,
       background-color 0.15s;
+    will-change: transform, background-color, border-color;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    contain: layout;
 
     &.not-top {
       --un-border-opacity: 0.4;

@@ -32,6 +32,7 @@ const effectiveBackgroundImage = backgroundImage ?? (defaultBg as ImageMetadata)
   <head>
     <BaseHead {articleDate} {description} {ogImage} {title} />
     <ThemeProvider />
+    <link rel='preload' as='image' href={effectiveBackgroundImage.src} />
   </head>
 
   <body class='flex justify-center bg-background text-foreground' {...props}>
@@ -40,14 +41,14 @@ const effectiveBackgroundImage = backgroundImage ?? (defaultBg as ImageMetadata)
         <div
           id='highlight-gradient'
           class='pointer-events-none fixed inset-0 z-0 opacity-40'
-          style={`background-image:url(${effectiveBackgroundImage.src});background-size:cover;background-position:center;`}
+          style={`background-image:url(${effectiveBackgroundImage.src});background-size:cover;background-position:center;background-attachment:fixed;will-change:opacity,transform;transform:translateZ(0);backface-visibility:hidden;contain:paint;`}
         />
       ) : (
         highlightColor && (
           <div
             id='highlight-gradient'
-            class='pointer-events-none absolute start-0 top-0 z-0 h-screen w-full opacity-25'
-            style={`background-image:linear-gradient(${highlightColor},transparent)`}
+            class='pointer-events-none fixed inset-0 z-0 opacity-25'
+            style={`background-image:linear-gradient(${highlightColor},transparent);will-change:opacity,transform;transform:translateZ(0);backface-visibility:hidden;contain:paint;`}
           />
         )
       )
@@ -55,7 +56,7 @@ const effectiveBackgroundImage = backgroundImage ?? (defaultBg as ImageMetadata)
     <div
       id='glass-overlay'
       class='pointer-events-none fixed inset-0 z-10'
-      style='backdrop-filter: blur(88px) saturate(0.8); background-color: hsl(var(--background) / 0.16); background-image: linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(255,255,255,0.08));'
+      style='backdrop-filter: blur(88px) saturate(0.8); -webkit-backdrop-filter: blur(88px) saturate(0.8); will-change: backdrop-filter, opacity; transform: translateZ(0); backface-visibility: hidden; isolation: isolate; contain: paint; background-color: hsl(var(--background) / 0.16); background-image: linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(255,255,255,0.08));'
     >
     </div>
     <div
