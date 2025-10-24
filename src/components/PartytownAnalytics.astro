@@ -1,24 +1,22 @@
 ---
 const gtmId = import.meta.env.PUBLIC_GTM_ID
 ---
- <!-- type='text/partytown' -->
 
 {
   gtmId && (
-    <script
-      async
-      is:inline
-      src={`https://www.googletagmanager.com/gtag/js?id=${gtmId}`}
-    />
+    <>
+      <script type='text/partytown' is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gtmId}`} />
 
-     <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function(...args) {
-        window.dataLayer.push(args);
-      };
-      gtag('js', new Date());
-      gtag('config', `${gtmId}`);
-      console.log('👋 Hello'); 
-    </script>
+      <script type='text/partytown' is:inline define:vars={{ gtmId }}>
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function() {
+          // eslint-disable-next-line prefer-rest-params
+          window.dataLayer.push(arguments);
+        };
+        gtag('js', new Date());
+        gtag('config', gtmId);
+        console.log('👋 Hello'); 
+      </script>
+    </>
   )
 }

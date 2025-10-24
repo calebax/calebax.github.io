@@ -118,9 +118,6 @@ export default defineConfig({
     contentIntellisense: true
   },
   vite: {
-    define: {
-      __GTM_ID__: JSON.stringify(process.env.PUBLIC_GTM_ID || '')
-    },
     plugins: [
       //   visualizer({
       //     emitFile: true,
