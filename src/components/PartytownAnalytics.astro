@@ -1,16 +1,17 @@
 ---
 const gtmId = import.meta.env.PUBLIC_GTM_ID
 ---
+ <!-- type='text/partytown' -->
 
 {
   gtmId && (
     <script
+      async
       is:inline
-      src={`https://www.googletagmanager.com/gtm.js?id=${gtmId}`}
-      type='text/partytown'
+      src={`https://www.googletagmanager.com/gtag/js?id=${gtmId}`}
     />
 
-     <script is:inline type='text/partytown'>
+     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       window.gtag = function(...args) {
         window.dataLayer.push(args);
